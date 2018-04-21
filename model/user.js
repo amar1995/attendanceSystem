@@ -4,8 +4,6 @@ const Schema = mongoose.Schema;
 var users = new Schema({
     id: {
         type: Number,
-        required: true,
-        unique: true,
         index: true 
     },
     name: {
@@ -24,26 +22,39 @@ var users = new Schema({
     contactNumber: {
         type: String
     },
-    email: {
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
+    email_id: {
         type: String,
-        required: true,
         unique: true
     },
     password: {
-        type: String,
-        required: true
+        type: String
     },
     username: {
-        type: String,
-        required: true
+        type: String
     },
+    subject: [{
+        name: {
+            type: String,
+            required: true
+        },
+        stream: {
+            type: String
+        },
+        semester: {
+            type: String
+        },
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    }],
     attendance: [{
         type: Schema.Types.ObjectId,
         ref: 'Attendance'
-    }],
-    subject: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Subjects'
     }]
 });
 

@@ -2,43 +2,60 @@ const express = require('express');
 const SerialPort = require('serialport');
 const parsers = SerialPort.parsers;
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 
 
 const app = express();
 
+mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/AttendanceSystem');
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+  extended: true,
+}));
 
+
+const {user, enrollUser} = require('./routes/user');
+const attendaceEntry = require('./routes/attendace');
+app.use('/users',user);
 
 // To link with arduino-uno on com3 serial port
 // Use a `\r\n` as a line terminator
 const parser = new parsers.Readline({
-  delimiter: '\r\n'
-});
+   delimiter: '\n'
+ });
 
 const serialPort = new SerialPort('COM3', {
-  baudRate: 9600,
-  autoOpen: false
+  baudRate: 9600
 });
 
 serialPort.pipe(parser);
 
-// serialPort.on('open').then((res) => {
-// 	  console.log('Port open');
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
+serialPort.on('open',(err) => {
+  if(err)
+  console.log(err);
+  else  
+  console.log('serialPort opened');
+});
+
+// parser.on('data',console.log);
 
 parser.on('data', (data) => {
+  // setTimeout( () => console.log(JSON.parse(data)),2000);
+  data = data.toString();
+  // const id = Number(data.slice(2));
+  // console.log(id);
   console.log(data);
   if ( data[1] === 'S' ) {
     // successfully attendance registered
-  } else if (data[1] === 'E') {
+    attendaceEntry((parseInt(data.slice(2))));
+   }  else if (data[1] === 'E') {
     // new fingerPrint id enrolled
-
-  } else {
-    // fingerPrint deleted
-  }
+    enrollUser((parseInt(data.slice(2))));
+  } // else {
+  //   // fingerPrint deleted
+  // }
 });
 
 // starting server
