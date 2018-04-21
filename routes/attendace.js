@@ -20,7 +20,7 @@ module.exports = function(id) {
     .exec((err,user) => {
         if(err) return handleError(err);
         user.attendance.push(attendance._id);
-        user.save(); 
-        console.log(attendance);
+        user.save();
+        //console.log(attendance);
     });
 }
