@@ -9,9 +9,10 @@
   "keywords": [
     "node",
     "serialport",
-    "mongoose",
     "nodemailer",
-    "express"
+    "Arduino",
+    "girdfs",
+    "Attendance System"
   ],
   "author": "Amar",
   "license": "ISC",
@@ -22,6 +23,7 @@
     "express": "^4.16.3",
     "gridfs-stream": "^1.1.1",
     "mongoose": "^5.0.14",
+    "morgan": "^1.9.0",
     "nodemailer": "^4.6.4",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",

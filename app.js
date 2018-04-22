@@ -3,7 +3,7 @@ const SerialPort = require('serialport');
 const parsers = SerialPort.parsers;
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
+const logger = require('morgan');
 
 
 const app = express();
@@ -14,12 +14,15 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true,
 }));
-
+app.use(logger('dev'));
 
 const {user, enrollUser} = require('./routes/user');
 const attendaceEntry = require('./routes/attendace');
+const posts = require('./routes/post');
+const notices = require('./routes/notice');
 app.use('/users',user);
-
+app.use('/post',posts);
+app.use('/notice',notices);
 // To link with arduino-uno on com3 serial port
 // Use a `\r\n` as a line terminator
 const parser = new parsers.Readline({
