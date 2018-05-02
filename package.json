@@ -15,7 +15,7 @@
     "Attendance System"
   ],
   "author": "Amar",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bcrypt": "^2.0.0",
     "body-parser": "^1.18.2",
