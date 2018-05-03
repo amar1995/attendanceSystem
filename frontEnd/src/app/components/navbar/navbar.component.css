@@ -15,3 +15,6 @@
 .img-responsive {
     height: 60px;
 }
+.navbar-brand {
+    margin-left: 5px !important;
+}

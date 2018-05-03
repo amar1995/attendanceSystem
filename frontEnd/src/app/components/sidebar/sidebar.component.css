@@ -1,0 +1,71 @@
+
+#mySidenav a {
+    position: fixed;
+    left: -120px;
+    transition: 0.3s;
+    padding: 15px;
+    padding-right: 5px; 
+    width: 150px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    margin-top: 50px;
+      
+    border-radius: 0 5px 5px 0;
+}
+
+#mySidenav a:hover {
+    left: 0;
+}
+
+#about {
+    top: 20px;
+    background-color: #be1027;
+}
+
+#blog {
+    top: 80px;
+    background-color: rgb(212, 28, 136);
+}
+
+#projects {
+    top: 140px;
+    background-color: rgb(128, 43, 226);
+}
+
+#contact {
+    top: 200px;
+    background-color: rgb(21, 100, 219);
+}
+
+#edit {
+    top: 260px;
+    background-color: rgb(25, 167, 32);
+}
+.sidenav {
+    text-align: right;
+}
+
+.badge-notice{
+    background:red;
+    position:fixed;
+    top: 190px;
+    transition: 0.3s;
+    left: 15px;
+ }
+
+ a:hover > .badge-post {
+     left: 140px;
+ }
+
+ .badge-post{
+    background:red;
+    position:fixed;
+    top: 130px;
+    transition: 0.3s;
+    left: 15px;
+ }
+
+ a:hover > .badge-notice {
+    left: 140px;
+}
