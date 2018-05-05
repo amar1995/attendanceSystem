@@ -22,6 +22,9 @@ var users = new Schema({
     contactNumber: {
         type: String
     },
+    address: {
+        type: String
+    },
     isAdmin: {
         type: Boolean,
         default: false

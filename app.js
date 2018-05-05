@@ -29,18 +29,18 @@ const parser = new parsers.Readline({
    delimiter: '\n'
  });
 
-const serialPort = new SerialPort('COM3', {
-  baudRate: 9600
-});
+// const serialPort = new SerialPort('COM3', {
+//   baudRate: 9600
+// });
 
-serialPort.pipe(parser);
+// serialPort.pipe(parser);
 
-serialPort.on('open',(err) => {
-  if(err)
-  console.log(err);
-  else  
-  console.log('serialPort opened');
-});
+// serialPort.on('open',(err) => {
+//   if(err)
+//   console.log(err);
+//   else  
+//   console.log('serialPort opened');
+// });
 
 // parser.on('data',console.log);
 
@@ -49,7 +49,7 @@ parser.on('data', (data) => {
   data = data.toString();
   // const id = Number(data.slice(2));
   // console.log(id);
-  console.log(data);
+  // console.log(data);
   if ( data[1] === 'S' ) {
     // successfully attendance registered
     attendaceEntry((parseInt(data.slice(2))));

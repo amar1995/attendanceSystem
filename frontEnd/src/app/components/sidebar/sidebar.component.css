@@ -10,7 +10,7 @@
     font-size: 20px;
     color: white;
     margin-top: 50px;
-      
+    box-shadow: 30px 40px 100px #000;
     border-radius: 0 5px 5px 0;
 }
 
@@ -44,7 +44,7 @@
 }
 .sidenav {
     text-align: right;
-}
+}   
 
 .badge-notice{
     background:red;

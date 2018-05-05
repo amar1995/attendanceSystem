@@ -2,8 +2,30 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../model/user');
-router.get('/profile',(req,res) => {
+const Attendance = require('../model/attendance');
 
+
+router.get('/profile',(req,res) => {
+    // console.log(req.query.id);
+    User.findOne({id:req.query.id}, (err,user) => {
+        if(err)
+        return res.send({
+            success: false,
+            msg: 'Something worng'
+        });
+        else if(!user)
+        return res.send({
+            success: false,
+            msg: 'User not found'
+        });
+        else {
+            
+            res.send({
+                success: true,
+                msg: user
+            });
+        }
+    });
 });
 
 router.post('/register', (req,res) => {
