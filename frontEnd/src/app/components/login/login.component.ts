@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  myForm: FormGroup;
+  myLoginForm: FormGroup;
   constructor() { }
 
   ngOnInit() {

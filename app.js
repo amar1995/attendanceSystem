@@ -4,6 +4,7 @@ const parsers = SerialPort.parsers;
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const logger = require('morgan');
+const passport = require('passport');
 
 
 const app = express();
@@ -15,6 +16,8 @@ app.use(bodyParser.urlencoded({
   extended: true,
 }));
 app.use(logger('dev'));
+app.use(passport.initialize());
+app.use(passport.session());
 
 const {user, enrollUser} = require('./routes/user');
 const attendaceEntry = require('./routes/attendace');

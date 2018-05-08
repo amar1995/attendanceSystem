@@ -1,30 +1,43 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const passport = require('passport');
+const localStrategy = require('passport-local').Strategy;
+const jwt = require('jsonwebtoken');
+const passportJwt = require('passport-jwt');
 const User = require('../model/user');
 const Attendance = require('../model/attendance');
 
 
-router.get('/profile',(req,res) => {
-    // console.log(req.query.id);
-    User.findOne({id:req.query.id}, (err,user) => {
-        if(err)
-        return res.send({
-            success: false,
-            msg: 'Something worng'
-        });
-        else if(!user)
-        return res.send({
-            success: false,
-            msg: 'User not found'
-        });
-        else {
-            
-            res.send({
-                success: true,
-                msg: user
-            });
+const ExtractJwt = passportJwt.ExtractJwt;
+const JwtStrategy = passportJwt.Strategy;
+const jwtOptions = {
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey: 'secret hai bro'
+}
+
+passport.use(new JwtStrategy(jwtOptions, function(jwt_payload, done) {
+    // console.log(jwt_payload);
+    User.findOne({id:jwt_payload.id}).then((err, user) => {
+        if (err) {
+            return done(err, false);
         }
+        if (user) {
+            done(null, user);
+        } else {
+            done(null, false);
+            // or you could create a new account
+        }
+    });
+}));
+
+router.get('/profile',passport.authenticate('jwt',{session:false}),
+    (req,res) => {
+    // console.log(req.query.id);
+    console.log(req);
+    res.send({
+        success: true,
+        msg: req
     });
 });
 
@@ -55,9 +68,13 @@ router.post('/register', (req,res) => {
                 bcrypt.hash(user.password, 10).then(function(hash) {
                     user.password=hash;
                     user.save().then((user)=>{
+                        const token = jwt.sign({ id: user.id},jwtOptions.secretOrKey,{
+                            expiresIn: 86400
+                        });
                         res.send({
                             success: true,
-                            msg: 'Successfully Registered'
+                            msg: 'Successfully Registered',
+                            token: token
                         });
                     },(err) => {
                         res.send({
@@ -121,7 +138,13 @@ router.post('/signup',(req,res) => {
     const id = req.body.id;
     const password = req.body.password;
     User.findOne({'id':req.body.id}, (err,user) => {
-        if(err){
+        if(err) {
+            return res.send({
+                success: false,
+                msg: 'User not found'
+            });
+        }
+        if(!user) {
             return res.send({
                 success: false,
                 msg: 'User not found'
@@ -129,9 +152,17 @@ router.post('/signup',(req,res) => {
         }
         bcrypt.compare(password, user.password).then(function(result) {
             if(result){
+                const token = jwt.sign(
+                    {id: user.id},
+                    jwtOptions.secretOrKey,
+                    {
+                        expiresIn: 86400
+                    }
+                )
                 return res.send({
                     success: true,
-                    msg: 'SuccessFully SignIn'
+                    msg: 'SuccessFully SignIn',
+                    token: token
                 });
             }
             return res.send({
