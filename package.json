@@ -20,6 +20,7 @@
     "bcrypt": "^2.0.0",
     "body-parser": "^1.18.2",
     "connect-multiparty": "^2.1.0",
+    "cors": "^2.8.4",
     "express": "^4.16.3",
     "gridfs-stream": "^1.1.1",
     "jsonwebtoken": "^8.2.1",

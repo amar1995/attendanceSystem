@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 const passport = require('passport');
-
+const cors = require('cors');
 
 const app = express();
 
@@ -15,6 +15,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true,
 }));
+app.use(cors());
 app.use(logger('dev'));
 app.use(passport.initialize());
 app.use(passport.session());

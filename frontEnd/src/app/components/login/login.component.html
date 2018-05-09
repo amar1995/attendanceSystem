@@ -1,12 +1,12 @@
 <div class = "container">
 	<div class="wrapper">
-		<form name="Login_Form" class="form-signin" [formGroup]="myLoginform">       
+		<form name="SignIp_Form" class="form-signin" [formGroup]="myLoginForm" (ngSubmit)="onSubmit()">      
 		    <h3 class="form-signin-heading">Welcome Back! Please Login</h3>
-			  <hr class="colorgraph"><br>
-			  
-			  <input type="text" class="form-control" name="Id" placeholder="Id" required="" autofocus="" />
-        <br>
-        <input type="password" class="form-control" name="Password" placeholder="Password" required=""/>     		  
+			<hr class="colorgraph"><br>
+			  <input type="text" class="form-control" name="id" formControlName="id" placeholder="Id" required="" autofocus="" />
+			<br>
+		
+        <input type="password" class="form-control" name="Password" formControlName="password" placeholder="Password" required=""/>     		  
 			 
 			  <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">Login</button>  			
 		</form>			

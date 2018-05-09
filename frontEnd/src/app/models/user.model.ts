@@ -10,3 +10,16 @@ export interface User extends Array<Subject> {
     contactNumber: string;
     address: string;
 }
+
+export interface LoginUser {
+    success: boolean;
+    user: Object;
+    token: string;
+}
+
+export interface TokenFormat {
+    id: number;
+    isAdmin: boolean;
+    iat: number;
+    exp: number;
+}

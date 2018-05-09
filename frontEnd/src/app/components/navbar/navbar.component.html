@@ -12,8 +12,10 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a [routerLink]="['/signup']"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a [routerLink]="['/login']"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li *ngIf="isLogin()"><a [routerLink]="['/signup']"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li *ngIf="isLogin()"><a [routerLink]="['/login']"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li *ngIf="isLogin()===false" ><a>Welcome</a></li>
+        <li *ngIf="isLogin()===false" ><a [routerLink]="['/']" (click)="onLogout()"><span class="glyphicon glyphicon-log-out">Logout</span></a></li>
       </ul>
     </div>
   </div>

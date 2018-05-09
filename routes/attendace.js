@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const Attendance = require('../model/attendance');
 const User = require('../model/user');
-
+const express = require('express');
+const router = express.Router();
 
 
 

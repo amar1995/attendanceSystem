@@ -14,6 +14,8 @@ import { HomeComponent } from './components/home/home.component';
 
 import { AuthenticationService } from './services/authService/authentication.service';
 import { IdFormComponent } from './components/id-form/id-form.component';
+import { AuthGuard } from './guard/auth.guard';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -31,7 +33,8 @@ const appRoutes: Routes = [
     SignupComponent,
     PageNotFoundComponent,
     HomeComponent,
-    IdFormComponent
+    IdFormComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ const appRoutes: Routes = [
     HttpClientModule
   ],
   providers: [
-    AuthenticationService
+    AuthenticationService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

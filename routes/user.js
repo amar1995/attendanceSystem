@@ -28,13 +28,16 @@ passport.use(new JwtStrategy(jwtOptions, function(jwt_payload, done) {
             done(null, false);
             // or you could create a new account
         }
+    })
+    .catch((e) => {
+        return done(e,false)
     });
 }));
 
 router.get('/profile',passport.authenticate('jwt',{session:false}),
     (req,res) => {
     // console.log(req.query.id);
-    console.log(req);
+    // console.log(req);
     res.send({
         success: true,
         msg: req
@@ -93,9 +96,9 @@ router.post('/register', (req,res) => {
     });
 });
 
-router.patch('/:id/edit',(req,res) => {
-    const id = req.params.id;
-    User.findOne({'id': id},(err,user) => {
+router.patch('/:id/edit',passport.authenticate('jwt',{session:false}),(req,res) => {
+
+    User.findOne({'id': req.id},(err,user) => {
         if(err)
         {
             return res.send({
@@ -153,7 +156,7 @@ router.post('/signup',(req,res) => {
         bcrypt.compare(password, user.password).then(function(result) {
             if(result){
                 const token = jwt.sign(
-                    {id: user.id},
+                    {id: user.id, isAdmin: user.isAdmin},
                     jwtOptions.secretOrKey,
                     {
                         expiresIn: 86400
