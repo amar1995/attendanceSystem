@@ -18,19 +18,18 @@ const jwtOptions = {
 
 passport.use(new JwtStrategy(jwtOptions, function(jwt_payload, done) {
     // console.log(jwt_payload);
-    User.findOne({id:jwt_payload.id}).then((err, user) => {
+    User.findOne({id:jwt_payload.id}, (err, user) => {
         if (err) {
+            // console.log("Error :- "+ err);
             return done(err, false);
         }
         if (user) {
-            done(null, user);
+            // console.log("User :- "+ user);
+            return done(null, user);
         } else {
-            done(null, false);
+            return done(null, false);
             // or you could create a new account
         }
-    })
-    .catch((e) => {
-        return done(e,false)
     });
 }));
 
@@ -38,9 +37,10 @@ router.get('/profile',passport.authenticate('jwt',{session:false}),
     (req,res) => {
     // console.log(req.query.id);
     // console.log(req);
+    // console.log(req);
     res.send({
         success: true,
-        msg: req
+        msg: req.user
     });
 });
 
@@ -115,7 +115,7 @@ router.patch('/:id/edit',passport.authenticate('jwt',{session:false}),(req,res) 
                 for(let val in body){
                     user[val] = body[val];
                 }
-                console.log(body);
+                // console.log(body);
                 user.save().then((user)=>{
                     res.send({
                         success: true,
@@ -192,7 +192,7 @@ router.post('/forget',(req,res) => {
             'msg': 'Email Sent'
         });
     }).catch((err) => {
-        console.log(err)
+        // console.log(err)
         res.json({
             'success':false,
             'msg':'User Not Found :('

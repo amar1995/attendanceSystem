@@ -16,11 +16,17 @@ import { AuthenticationService } from './services/authService/authentication.ser
 import { IdFormComponent } from './components/id-form/id-form.component';
 import { AuthGuard } from './guard/auth.guard';
 import { ProfileComponent } from './components/profile/profile.component';
+import { NoticeComponent } from './components/notice/notice.component';
+import { BlogComponent } from './components/blog/blog.component';
+import { EditComponent } from './components/edit/edit.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: IdFormComponent },
+  { path: 'blog', component: BlogComponent},
+  { path: 'profile', component: ProfileComponent},
+  { path: 'edit', component: EditComponent},
   { path: '**', component: PageNotFoundComponent}
 ];
 
@@ -34,7 +40,10 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     HomeComponent,
     IdFormComponent,
-    ProfileComponent
+    ProfileComponent,
+    NoticeComponent,
+    BlogComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,

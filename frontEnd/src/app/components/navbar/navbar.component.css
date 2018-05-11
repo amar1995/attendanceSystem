@@ -24,3 +24,13 @@
     padding-top: 10px;
 
 }
+
+.btn {
+    background-color: #222222;
+    border: none;
+    color: rgb(146, 143, 143);
+    padding: 15px 10px;
+}
+.btn:hover {
+    color: white;
+}

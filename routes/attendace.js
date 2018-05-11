@@ -22,6 +22,6 @@ module.exports = function(id) {
         if(err) return handleError(err);
         user.attendance.push(attendance._id);
         user.save();
-        //console.log(attendance);
+        // console.log(attendance);
     });
 }

@@ -14,7 +14,14 @@
       <ul class="nav navbar-nav navbar-right">
         <li *ngIf="isLogin()"><a [routerLink]="['/signup']"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
         <li *ngIf="isLogin()"><a [routerLink]="['/login']"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        <li *ngIf="isLogin()===false" ><a>Welcome</a></li>
+        <li class="dropdown" *ngIf="isLogin()===false">
+            <button class="btn  dropdown-toggle" type="button" data-toggle="dropdown">Welcome
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a [routerLink]="['/profile']"> Profile</a></li>
+              <li><a [routerLink]="['/edit']">Edit</a></li>
+            </ul>
+        </li>
         <li *ngIf="isLogin()===false" ><a [routerLink]="['/']" (click)="onLogout()"><span class="glyphicon glyphicon-log-out">Logout</span></a></li>
       </ul>
     </div>

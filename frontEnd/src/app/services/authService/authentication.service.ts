@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoginUser, TokenFormat } from '../../models/user.model';
+import { Observable } from 'rxjs/observable';
+import { LoginUser, TokenFormat, User } from '../../models/user.model';
 import * as jwt_decode from 'jwt-decode';
 
 
 @Injectable()
 export class AuthenticationService {
   domain: 'http://localhost:3000/';
+  httpHeader: HttpHeaders = new  HttpHeaders()
+  .set('Content-Type', 'application/json')
+  .set('Authorization', 'bearer ' + this.getToken());
   constructor(private http: HttpClient) { }
 
   onLogin(value) {
@@ -41,5 +45,11 @@ export class AuthenticationService {
   }
   clearToken(): void {
     localStorage.clear();
+  }
+
+  getUserDetail(): Observable<User> {
+    // this.httpHeader.set('Authorization', 'bearer ' + this.getToken());
+    // console.log(this.httpHeader);
+    return this.http.get<User>('http://localhost:3000/users/profile', {headers: this.httpHeader});
   }
 }
