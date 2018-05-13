@@ -33,8 +33,26 @@ passport.use(new JwtStrategy(jwtOptions, function(jwt_payload, done) {
     });
 }));
 
+router.get('/attendance', passport.authenticate('jwt',{session: false}),
+(req,res) => {
+    let attendanceArray = [];
+    const attendanceIds = req.user.attendance;
+    // console.log(attendanceIds);
+    for(let i=0;i< attendanceIds.length; i++)
+    {
+        Attendance.findById(attendanceIds[i],(err,result) => {
+            attendanceArray.push(result);
+            if(i === attendanceIds.length-1) 
+            return res.send({
+                success: true,
+                msg: attendanceArray
+            });
+        });
+    }
+});
+
 router.get('/profile',passport.authenticate('jwt',{session:false}),
-    (req,res) => {
+(req,res) => {
     // console.log(req.query.id);
     // console.log(req);
     // console.log(req);
@@ -46,6 +64,7 @@ router.get('/profile',passport.authenticate('jwt',{session:false}),
 
 router.post('/register', (req,res) => {
     const id = req.body.id;
+    console.log(req.body);
     User.findOne({'id': id},(err,user) => {
         if(err)
         {
@@ -54,7 +73,7 @@ router.post('/register', (req,res) => {
                 msg: 'Some Error Occured'
             });
         }
-        else if(user.name) {
+        else if(user!== null && user.name) {
             return res.send({
                 success: false,
                 msg: 'User already present,You Can edit profile'
@@ -71,13 +90,10 @@ router.post('/register', (req,res) => {
                 bcrypt.hash(user.password, 10).then(function(hash) {
                     user.password=hash;
                     user.save().then((user)=>{
-                        const token = jwt.sign({ id: user.id},jwtOptions.secretOrKey,{
-                            expiresIn: 86400
-                        });
+                       
                         res.send({
                             success: true,
                             msg: 'Successfully Registered',
-                            token: token
                         });
                     },(err) => {
                         res.send({

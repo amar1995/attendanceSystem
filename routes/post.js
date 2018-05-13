@@ -58,12 +58,33 @@ const fileSavingUsingGrid = async function(files,arrayObject){
     }
     return arrayObject
 }
-router.get('/',(req,res) => {
-
+router.get('/:id',(req,res) => {
+   // console.log(req.query);
+    console.log(req.params);  
+    Post.findById("5adbaa710b686c1e8819a2a6", (err,result) => {
+        const db = mongoose.connection.db ? mongoose.connection.db : 'AttendanceSystem';
+        const mongoDriver = mongoose.mongo;
+        const gfs = new Gridfs(db,mongoDriver);
+        // console.log(req.params.id);
+        var readstream = gfs.createReadStream({
+            _id: req.rawHeaders[11]
+         });
+         readstream.pipe(res);
+        
+    });
 });
 
-router.post('/:isAdmin',multiparty,(req,res) => {
-    if(req.params.isAdmin === "true"){
+router.get('/',(req,res) => {
+    Post.find({},(err,result) => {
+        res.send({
+            msg: result
+        })
+    })
+});
+
+router.post('/',multiparty,(req,res) => {
+    console.log(req.body.isAdmin);
+    if(req.body.isAdmin === "true"){
         require('../utils/objectExtracter')(req.body,['title','description'])
         .then((body) => {
             var posts = new Post(body);

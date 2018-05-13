@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -14,19 +16,48 @@ import { HomeComponent } from './components/home/home.component';
 
 import { AuthenticationService } from './services/authService/authentication.service';
 import { IdFormComponent } from './components/id-form/id-form.component';
-import { AuthGuard } from './guard/auth.guard';
+import { AuthGuard, LoginGuard, AdminGuard } from './guard/auth.guard';
 import { ProfileComponent } from './components/profile/profile.component';
 import { NoticeComponent } from './components/notice/notice.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { EditComponent } from './components/edit/edit.component';
+import { AttendanceComponent } from './components/attendance/attendance.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: IdFormComponent },
-  { path: 'blog', component: BlogComponent},
-  { path: 'profile', component: ProfileComponent},
-  { path: 'edit', component: EditComponent},
+  { path: 'login',
+    component: LoginComponent,
+    canActivate: [LoginGuard]
+  },
+  { path: 'signup/:id',
+    component: SignupComponent,
+    canActivate: [AdminGuard]
+  },
+  { path: 'idForm',
+    component: IdFormComponent,
+    canActivate: [AdminGuard]
+  },
+  { path: 'blog',
+    component: BlogComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: 'edit',
+    component: EditComponent,
+    canActivate: [AuthGuard]
+  },
+  {path: 'attendance',
+    component: AttendanceComponent,
+    canActivate: [AuthGuard]
+  },
+  {path: 'notice',
+    component: NoticeComponent,
+    canActivate: [AuthGuard]
+
+  },
   { path: '**', component: PageNotFoundComponent}
 ];
 
@@ -43,17 +74,22 @@ const appRoutes: Routes = [
     ProfileComponent,
     NoticeComponent,
     BlogComponent,
-    EditComponent
+    EditComponent,
+    AttendanceComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes, {useHash: true}),
-    HttpClientModule
+    HttpClientModule,
+    FlashMessagesModule.forRoot()
   ],
   providers: [
     AuthenticationService,
-    AuthGuard
+    AuthGuard,
+    LoginGuard,
+    AdminGuard
   ],
   bootstrap: [AppComponent]
 })

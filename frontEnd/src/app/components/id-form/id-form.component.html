@@ -4,15 +4,25 @@
 		    <h3 class="form-signin-heading">Welcome! Please Enter ID</h3>
 			  <hr class="colorgraph"><br>
 			  
-			  <div class="form-group">
-          <label for='id'>ID: </label>
-            <input type="text" class="form-control" name="id" 
-            placeholder="id" formControlName= "id" 
-            required="" autofocus="" />
-        </div>
+              <div class="form-group" 
+              [ngClass]="{'has-error': displayMessage.id }">
+                <label for="productNameId">Id</label>
+                        <input class="form-control" 
+                                        id="userId" 
+                                        type="text" 
+                                        placeholder="Id" 
+                                        formControlName="id" />
+                        <span class="help-block" *ngIf="displayMessage.id">
+                                        {{displayMessage.id}}
+                        </span>
+                
+            </div>
+            <br>
+
         <div class="form-inline">
           <label for='submitType'>Choose: </label>
           <br>
+
         <div class=" form-inline ">
           <input type="checkbox" name="register" formControlName="register" id="fancy-checkbox-primary" autocomplete="off" />
           <div class=" btn-group ">
@@ -37,7 +47,12 @@
         </div>
         </div>
         <br>
-        <button class="btn btn-lg btn-primary pull-right "  name="submit" value="submit" type="Submit" >Submit</button>  			
+        <button class="btn btn-primary"
+            type="submit"
+            style="width:80px;margin-right:10px"
+            [disabled]='!formId.valid'>
+            Submit
+        </button>  			
           
     </form>
 	</div>

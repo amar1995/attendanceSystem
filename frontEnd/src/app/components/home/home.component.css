@@ -1,0 +1,23 @@
+
+.container-fluid {
+    width: 100vw;
+    height: 100%;
+}
+
+div {
+    height: 510px !important;
+    margin-top: -7px;
+}
+
+#home { 
+    /* The image used */
+    background-image: url("../../../assets/images/Attendance-Tracking-Software-for-Schools.jpg");
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

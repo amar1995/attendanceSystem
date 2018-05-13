@@ -12,97 +12,115 @@
                                 <span class="glyphicon glyphicon-cog" style="margin-right: 0px;"></span>
                             </button>
                             <ul class="dropdown-menu slidedown">
-                                <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-pencil"></span>Edit</a></li>
-                                <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-trash"></span>Delete</a></li>
-                                <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-flag"></span>Flag</a></li>
+                                <li><a [routerLink]="['/edit']"><span class="glyphicon glyphicon-pencil"></span>Edit</a></li>
+                                <li><a [routerLink]="['/attendance']"><span class="glyphicon glyphicon-briefcase"></span>Attendance</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
-                        <li class="list-group-item">
+                        <li class="list-group-item lists">
                             <div class="pull-left">
-                               <p class="text-bold">Name</p>
+                               <p class="text-bold">ID</p>
                            </div>
                             <div class="pull-right action-buttons">
-                              <p>Amar</p>
+                              <p>{{userDetail.id}}</p>
                             </div>
                         </li>
-                        <li class="list-group-item">
-                            <div class="checkbox">
-                                <input type="checkbox" id="checkbox2" />
-                                <label for="checkbox2">
-                                    List group item heading 1
-                                </label>
-                            </div>
-                           <div class="pull-right action-buttons">
-                                <a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-pencil"></span></a>
-                                <a href="http://www.jquery2dotnet.com" class="trash"><span class="glyphicon glyphicon-trash"></span></a>
-                                <a href="http://www.jquery2dotnet.com" class="flag"><span class="glyphicon glyphicon-flag"></span></a>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="checkbox">
-                                <input type="checkbox" id="checkbox3" />
-                                <label for="checkbox3">
-                                    List group item heading 2
-                                </label>
+                        <li class="list-group-item lists">
+                            <div class="pull-left">
+                                <p class="text-bold">Name</p>
                             </div>
                             <div class="pull-right action-buttons">
-                                <a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-pencil"></span></a>
-                                <a href="http://www.jquery2dotnet.com" class="trash"><span class="glyphicon glyphicon-trash"></span></a>
-                                <a href="http://www.jquery2dotnet.com" class="flag"><span class="glyphicon glyphicon-flag"></span></a>
+                                <p>{{userDetail.name}}</p>
                             </div>
                         </li>
-                        <li class="list-group-item">
-                            <div class="checkbox">
-                                <input type="checkbox" id="checkbox4" />
-                                <label for="checkbox4">
-                                    List group item heading 3
-                                </label>
+                        <li class="list-group-item lists">
+                            <div class="pull-left">
+                                <p class="text-bold">Post</p>
                             </div>
                             <div class="pull-right action-buttons">
-                                <a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-pencil"></span></a>
-                                <a href="http://www.jquery2dotnet.com" class="trash"><span class="glyphicon glyphicon-trash"></span></a>
-                                <a href="http://www.jquery2dotnet.com" class="flag"><span class="glyphicon glyphicon-flag"></span></a>
+                                <p>{{userDetail.post}}</p>
+                            </div>
+                        </li>   
+                        <li class="list-group-item lists">
+                            <div class="pull-left">
+                                <p class="text-bold">Date Of Joining</p>
+                            </div>
+                            <div class="pull-right action-buttons">
+                                <p>{{replaceTZ(userDetail.dateOfJoining)}}</p>
+                            </div>
+                        </li>   
+                        <li class="list-group-item lists">
+                            <div class="pull-left">
+                                <p class="text-bold">Email-ID</p>
+                            </div>
+                            <div class="pull-right action-buttons">
+                                <p>{{userDetail.email_id}}</p>
                             </div>
                         </li>
-                        <li class="list-group-item">
-                            <div class="checkbox">
-                                <input type="checkbox" id="checkbox5" />
-                                <label for="checkbox5">
-                                    List group item heading 4
-                                </label>
+                        <li class="list-group-item lists">
+                            <div class="pull-left">
+                                <p class="text-bold">Contact</p>
                             </div>
-                           <div class="pull-right action-buttons">
-                                <a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-pencil"></span></a>
-                                <a href="http://www.jquery2dotnet.com" class="trash"><span class="glyphicon glyphicon-trash"></span></a>
-                                <a href="http://www.jquery2dotnet.com" class="flag"><span class="glyphicon glyphicon-flag"></span></a>
+                            <div class="pull-right action-buttons">
+                                <p>{{userDetail.contactNumber}}</p>
+                            </div>
+                        </li>
+                        <li class="list-group-item lists">
+                            <div class="pull-left">
+                                <p class="text-bold">Address</p>
+                            </div>
+                            <div class="pull-right action-buttons">
+                                <p>{{userDetail.address}}</p>
+                            </div>
+                        </li>
+                        <li class="list-group-item lists">
+                            <div class="pull-left">
+                                <p class="text-bold">Date Of Birth</p>
+                            </div>
+                            <div class="pull-right action-buttons">
+                                <p>{{userDetail.dateOfBirth}}</p>
+                            </div>
+                        </li>
+                        <li class="list">
+                            <div>
+                                <p class="text-bold">Subject</p>
+                            </div>
+                        </li>
+
+                        
+                            
+                        
+                    </ul>
+                    <ul class="list-inline" *ngFor="let subject of userDetail.subject">
+                        <li>
+                            <div>
+                                <p class="text-bold">Subject Name: </p>
+                            </div>
+                            <div>
+                                <p>{{subject.name}}</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <p class="text-bold">Subject Stream: </p>
+                                <p>{{subject.stream}}</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <p class="text-bold">Subject Semester: </p>
+                            </div>
+                            <div>
+                                <p>{{subject.semester}}</p>
                             </div>
                         </li>
                     </ul>
                 </div>
-                <div class="panel-footer">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h6>
-                                Total Count <span class="label label-info">25</span></h6>
-                        </div>
-                        <div class="col-md-6">
-                            <ul class="pagination pagination-sm pull-right">
-                                <li class="disabled"><a href="javascript:void(0)">«</a></li>
-                                <li class="active"><a href="javascript:void(0)">1 <span class="sr-only">(current)</span></a></li>
-                                <li><a href="http://www.jquery2dotnet.com">2</a></li>
-                                <li><a href="http://www.jquery2dotnet.com">3</a></li>
-                                <li><a href="http://www.jquery2dotnet.com">4</a></li>
-                                <li><a href="http://www.jquery2dotnet.com">5</a></li>
-                                <li><a href="javascript:void(0)">»</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </div>       
         </div>
     </div>
 </div>
+<router-outlet></router-outlet>

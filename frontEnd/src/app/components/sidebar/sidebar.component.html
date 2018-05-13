@@ -1,7 +1,28 @@
 <div id="mySidenav" class="sidenav">
-    <a href="#" id="about">Attendance <span class="glyphicon glyphicon-briefcase"></span></a>
-    <a href="#" id="blog">Blog <span class="glyphicon glyphicon-bell" ></span> <span class="badge badge-secondary badge-post">New</span></a>
-    <a href="#" id="projects">Notice <span class="glyphicon glyphicon-alert"></span> <span class="badge badge-light badge-notice">4</span></a>
-    <a href="#" id="contact">Contact <span class="glyphicon glyphicon-phone"></span></a>
-    <a href="#" id="edit">Edit <span class="glyphicon glyphicon-edit"></span></a>
+    <a [routerLink]="['/attendance']" id="about">Attendance <span class="glyphicon glyphicon-briefcase"></span></a>
+    <a [routerLink]="['/blog']" id="blog">Blog <span class="glyphicon glyphicon-bell" ></span> <span class="badge badge-secondary badge-post">New</span></a>
+    <a [routerLink]="['/notice']" id="projects">Notice <span class="glyphicon glyphicon-alert"></span> <span class="badge badge-light badge-notice">4</span></a>
+</div>
+<router-outlet></router-outlet>
+<!--
+<div class="left">
+  <div class="item">
+  <span class="glyphicon glyphicon-th-large"></span>
   </div>
+  <div class="item active">
+  <span class="glyphicon glyphicon-th-list"></span>
+      Все документы</div>
+  <div class="item">
+  <span class="glyphicon glyphicon-log-out"></span>
+      Расходные накладные</div>
+  <div class="item">
+  <span class="glyphicon glyphicon-log-in"></span>
+      Приходные накладные</div> 
+  <div class="item">
+  <span class="glyphicon glyphicon-random"></span>
+      Акты переоценки</div>
+  <div class="item">
+  <span class="glyphicon glyphicon-remove"></span>
+      Акты списания</div>    
+  </div>
+-->

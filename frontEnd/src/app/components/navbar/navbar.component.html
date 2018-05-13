@@ -20,6 +20,7 @@
             <ul class="dropdown-menu">
               <li><a [routerLink]="['/profile']"> Profile</a></li>
               <li><a [routerLink]="['/edit']">Edit</a></li>
+              <li *ngIf="isAdmin()"><a [routerLink]="['/idForm']">New Register</a></li>
             </ul>
         </li>
         <li *ngIf="isLogin()===false" ><a [routerLink]="['/']" (click)="onLogout()"><span class="glyphicon glyphicon-log-out">Logout</span></a></li>
@@ -27,5 +28,5 @@
     </div>
   </div>
 </nav>
+
 <router-outlet></router-outlet>
-<div class="heights"></div>

@@ -8,11 +8,20 @@
 .list-group-item:hover, a.list-group-item:focus {text-decoration: none;background-color: rgb(245, 245, 245);}
 .list-group { margin-bottom:0px; }
 
-.list-group-item {
+.lists {
     position: relative;
     display: block;
     padding: 25px 25px;
     margin-bottom: -1px;
     background-color: #fff;
     border: 1px solid #ddd;
+}
+
+.list {
+    padding: 10px;
+}
+
+.text-bold {
+    font-weight: 600;
+    font-style: oblique;
 }

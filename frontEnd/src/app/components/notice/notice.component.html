@@ -1,3 +1,101 @@
-<p>
-  notice works!
-</p>
+
+
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-md-4">
+          <br>
+            <form>
+                <div class="form-group">
+                    <label for="multiple">Choose file(s)</label>
+                    <input type="file" class="form-control" name="multiple" ng2FileSelect [uploader]="uploader" multiple  />
+                </div>            
+            </form>
+        </div>
+        </div>
+        <br>
+        <div class="col-md-8">
+             File(s) Selected: {{ uploader?.queue?.length }}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th width="50%">Name</th>
+                    <th>Size</th>
+                    <th>Progress</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of uploader.queue">
+                    <td><strong>{{ item.file.name }}</strong></td>
+                    <td nowrap>{{ item.file.size/1024/1024 | number:'.2' }} MB</td>
+                    <td>
+                        <div class="progress" style="margin-bottom: 0;">
+                            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <span *ngIf="item.isSuccess"><i class="fa fa-check"></i></span>
+                        <span *ngIf="item.isCancel"><i class="fa fa-ban"></i></span>
+                        <span *ngIf="item.isError"><i class="fa fa-times"></i></span>
+                    </td>
+                    <td nowrap>
+                        <button type="button" class="btn btn-success btn-xs"
+                                (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                            <span class="fa fa-upload"></span> Upload
+                        </button>
+                        <button type="button" class="btn btn-warning btn-xs"
+                                (click)="item.cancel()" [disabled]="!item.isUploading">
+                            <span class="fa fa-ban"></span> Cancel
+                        </button>
+                        <button type="button" class="btn btn-danger btn-xs"
+                                (click)="item.remove()">
+                            <span class="fa fa-trash"></span> Remove
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div>
+                <hr>
+                <div>
+                    Total progress:
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                    </div>
+                    <hr>
+                </div>
+                <button type="button" class="btn btn-success btn-s"
+                        (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                    <span class="fa fa-upload"></span> Upload all
+                </button>
+                <button type="button" class="btn btn-warning btn-s"
+                        (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+                    <span class="fa fa-ban"></span> Cancel all
+                </button>
+                <button type="button" class="btn btn-danger btn-s"
+                        (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                    <span class="fa fa-trash"></span> Remove all
+                </button>
+            </div>
+        </div>
+  </div>
+  <hr>
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>File Name</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let file of files">
+            <td>{{ file.originalname }}</td>
+            <td><button class="btn btn-primary button" (click)="downloadPdf(file.filename, file.contentType)">Download</button></td>
+          </tr>   
+        </tbody>
+      </table>
+  </div>
+   -->

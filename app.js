@@ -9,8 +9,7 @@ const cors = require('cors');
 
 const app = express();
 
-mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/AttendanceSystem');
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true,
@@ -20,10 +19,15 @@ app.use(logger('dev'));
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/AttendanceSystem');
+
 const {user, enrollUser} = require('./routes/user');
-const attendaceEntry = require('./routes/attendace');
+const attendanceEntry = require('./routes/attendace');
 const posts = require('./routes/post');
 const notices = require('./routes/notice');
+
 app.use('/users',user);
 app.use('/post',posts);
 app.use('/notice',notices);
@@ -56,7 +60,7 @@ parser.on('data', (data) => {
   // console.log(data);
   if ( data[1] === 'S' ) {
     // successfully attendance registered
-    attendaceEntry((parseInt(data.slice(2))));
+    attendanceEntry((parseInt(data.slice(2))));
    }  else if (data[1] === 'E') {
     // new fingerPrint id enrolled
     enrollUser((parseInt(data.slice(2))));

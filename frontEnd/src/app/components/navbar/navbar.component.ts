@@ -17,6 +17,10 @@ export class NavbarComponent implements OnInit {
     return this.authService.isTokenExpired();
   }
 
+  isAdmin() {
+    return this.authService.isAdmin();
+  }
+
   onLogout() {
     this.authService.clearToken();
   }

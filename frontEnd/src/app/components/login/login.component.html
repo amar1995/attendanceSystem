@@ -3,12 +3,38 @@
 		<form name="SignIp_Form" class="form-signin" [formGroup]="myLoginForm" (ngSubmit)="onSubmit()">      
 		    <h3 class="form-signin-heading">Welcome Back! Please Login</h3>
 			<hr class="colorgraph"><br>
-			  <input type="text" class="form-control" name="id" formControlName="id" placeholder="Id" required="" autofocus="" />
-			<br>
-		
-        <input type="password" class="form-control" name="Password" formControlName="password" placeholder="Password" required=""/>     		  
-			 
-			  <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">Login</button>  			
+			<div class="form-group" 
+						[ngClass]="{'has-error': displayMessage.id }">
+				<label for="productNameId">Id</label>
+
+						<input class="form-control" 
+										id="userId" 
+										type="text" 
+										placeholder="Id" 
+										formControlName="id" />
+						<span class="help-block" *ngIf="displayMessage.id">
+										{{displayMessage.id}}
+						</span>
+			</div>
+			<div class="form-group" 
+						[ngClass]="{'has-error': displayMessage.password }">
+				<label for="userId">Password</label>
+
+						<input class="form-control" 
+										id="userPassword" 
+										type="password" 
+										placeholder="password" 
+										formControlName="password" />
+						<span class="help-block" *ngIf="displayMessage.password">
+										{{displayMessage.password}}
+						</span>
+			</div>
+			<button class="btn btn-primary"
+				type="submit"
+				style="width:80px;margin-right:10px"
+				[disabled]='!myLoginForm.valid'>
+				Login
+			</button>
 		</form>			
 	</div>
 </div>

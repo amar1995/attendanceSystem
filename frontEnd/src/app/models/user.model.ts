@@ -23,3 +23,15 @@ export interface TokenFormat {
     iat: number;
     exp: number;
 }
+
+export interface ServerDataModel {
+    msg: User;
+    id: number;
+    name: string;
+    post: string;
+    email_id: string;
+    password: string;
+    dateOfBirth: string;
+    contactNumber: string;
+    address: string;
+}

@@ -2,7 +2,7 @@
 
 module.exports = async function(body,parameters) {
     let obj = {};
-    if(body.subject)
+    if(body.subject && typeof body.subject === String)
     {
         var s = body.subject;
         s = s.replace(/\\n/g, "\\n")  
