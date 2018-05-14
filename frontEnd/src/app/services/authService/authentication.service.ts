@@ -72,9 +72,9 @@ export class AuthenticationService {
     // return this.http.get('http://127.0.0.1:3000/files');
   }
 
-  getAttendance() {
-    if (this.isAdmin() && this.route.snapshot.params.id) {
-      const url = 'http://127.0.0.1:3000/admin/' + this.route.snapshot.params.id + '/attendance';
+  getAttendance(value) {
+    if (this.isAdmin() && value.id) {
+      const url = 'http://127.0.0.1:3000/admin/' + value.id + '/attendance';
       return this.http.get(url);
     } else {
       return this.http.get('http://127.0.0.1:3000/users/attendance', {headers: this.httpHeader});

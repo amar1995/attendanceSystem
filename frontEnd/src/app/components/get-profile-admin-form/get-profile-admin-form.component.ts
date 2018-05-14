@@ -52,6 +52,6 @@ export class GetProfileAdminFormComponent implements OnInit {
     });
   }
   onSubmit() {
-    this.router.navigate([`/profile/:${this.formId.value.id}`]);
+    this.router.navigate([`/profile/${this.formId.value.id}`]);
   }
 }

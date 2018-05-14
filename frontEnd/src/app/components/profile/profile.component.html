@@ -12,8 +12,8 @@
                                 <span class="glyphicon glyphicon-cog" style="margin-right: 0px;"></span>
                             </button>
                             <ul class="dropdown-menu slidedown">
-                                <li><a [routerLink]="['/edit']"><span class="glyphicon glyphicon-pencil"></span>Edit</a></li>
-                                <li><a [routerLink]="['/attendance']"><span class="glyphicon glyphicon-briefcase"></span>Attendance</a></li>
+                                <li><a (click)="editRoute()"><span class="glyphicon glyphicon-pencil"></span>Edit</a></li>
+                                <li><a (click)="attendanceRoute()"><span class="glyphicon glyphicon-briefcase"></span>Attendance</a></li>
                             </ul>
                         </div>
                     </div>
@@ -123,4 +123,3 @@
         </div>
     </div>
 </div>
-<router-outlet></router-outlet>

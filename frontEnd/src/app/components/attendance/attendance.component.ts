@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authService/authentication.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   templateUrl: './attendance.component.html',
@@ -8,12 +9,17 @@ import { AuthenticationService } from '../../services/authService/authentication
 export class AttendanceComponent implements OnInit {
   user: number;
   attendances: any;
-  constructor(private authService: AuthenticationService) {
-    this.user = this.authService.getId();
+  constructor(private authService: AuthenticationService,
+    private activeRoute: ActivatedRoute) {
+    if (this.authService.isAdmin() && this.activeRoute.snapshot.params.id) {
+      this.user = this.activeRoute.snapshot.params.id;
+    } else {
+      this.user = this.authService.getId();
+    }
    }
 
   ngOnInit() {
-    this.authService.getAttendance().subscribe(data => {
+    this.authService.getAttendance(this.activeRoute.snapshot.params.id).subscribe(data => {
       this.attendances = data['msg'];
     });
   }

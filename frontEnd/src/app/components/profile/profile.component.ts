@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authService/authentication.service';
 import { User } from '../../models/user.model';
 import { Subject } from '../../models/subjects.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   templateUrl: './profile.component.html',
@@ -12,7 +12,8 @@ export class ProfileComponent implements OnInit {
   userDetail = { };
   value = {};
   constructor(private authService: AuthenticationService,
-    private activeRoute: ActivatedRoute) { }
+    private activeRoute: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
     this.value['id'] = this.activeRoute.snapshot.params.id;
@@ -28,10 +29,30 @@ export class ProfileComponent implements OnInit {
       this.userDetail['contactNumber'] = data['contactNumber'];
       this.userDetail['post'] = data['post'];
       if ( data['dateOfJoining']) {
-        this.userDetail['dateOfJoining'] = data['dateOfJoining'];
+         this.userDetail['dateOfJoining'] = data['dateOfJoining'];
       }
     });
   }
+  editRoute() {
+    if ( this.authService.isAdmin() && this.activeRoute.snapshot.params.id) {
+      const edit = '/edit/' + this.activeRoute.snapshot.params.id;
+      this.router.navigate([edit]);
+    } else {
+      const edit = '/edit';
+      this.router.navigate([edit]);
+    }
+  }
+
+  attendanceRoute() {
+    if ( this.authService.isAdmin() && this.activeRoute.snapshot.params.id) {
+      const attendance = '/attendance/' + this.activeRoute.snapshot.params.id;
+      this.router.navigate([attendance]);
+    } else {
+      const attendance = '/attendance';
+      this.router.navigate([attendance]);
+    }
+  }
+
 
   replaceTZ(time) {
     if ( time !== undefined ) {
