@@ -27,10 +27,12 @@ const {user, enrollUser} = require('./routes/user');
 const attendanceEntry = require('./routes/attendace');
 const posts = require('./routes/post');
 const notices = require('./routes/notice');
+const admin = require('./routes/admin');
 
 app.use('/users',user);
 app.use('/post',posts);
 app.use('/notice',notices);
+app.use('/admin',admin);
 // To link with arduino-uno on com3 serial port
 // Use a `\r\n` as a line terminator
 const parser = new parsers.Readline({

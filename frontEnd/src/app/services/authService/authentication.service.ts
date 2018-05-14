@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/observable';
 import { LoginUser, TokenFormat, User, ServerDataModel } from '../../models/user.model';
 import * as jwt_decode from 'jwt-decode';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Injectable()
@@ -11,7 +12,8 @@ export class AuthenticationService {
   httpHeader: HttpHeaders = new  HttpHeaders()
   .set('Content-Type', 'application/json')
   .set('Authorization', 'bearer ' + this.getToken());
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private route: ActivatedRoute) { }
 
   onLogin(value) {
     return this.http
@@ -50,6 +52,11 @@ export class AuthenticationService {
   clearToken(): void {
     localStorage.clear();
   }
+  getId(): number {
+    const token = this.getToken();
+    const decoded: TokenFormat = jwt_decode(token);
+    return decoded.id;
+  }
 
   getUserDetail() {
     // this.httpHeader.set('Authorization', 'bearer ' + this.getToken());
@@ -66,11 +73,36 @@ export class AuthenticationService {
   }
 
   getAttendance() {
-    return this.http.get('http://127.0.0.1:3000/users/attendance', {headers: this.httpHeader});
+    if (this.isAdmin() && this.route.snapshot.params.id) {
+      const url = 'http://127.0.0.1:3000/admin/' + this.route.snapshot.params.id + '/attendance';
+      return this.http.get(url);
+    } else {
+      return this.http.get('http://127.0.0.1:3000/users/attendance', {headers: this.httpHeader});
+    }
+  }
+  getProfileById(value) {
+    if (this.isAdmin() && value.id) {
+      const url = 'http://127.0.0.1:3000/admin/' + value.id + '/profile';
+      console.log(url);
+      return this.http.get(url);
+    } else {
+      const url = 'http://127.0.0.1:3000/users/profile';
+      return this.http.get(url, {headers: this.httpHeader});
+    }
   }
 
   registerNewUser(value) {
     console.log(value);
     return this.http.post('http://127.0.0.1:3000/users/register', value);
+  }
+
+  editUser(value) {
+    if (this.isAdmin()) {
+      const url = 'http://127.0.0.1:3000/admin/' + value.id + '/edit';
+      return this.http.patch(url, value);
+    } else {
+      const url = 'http://127.0.0.1:3000/users/' + value.id + '/edit';
+      return this.http.patch(url, value, {headers: this.httpHeader});
+    }
   }
 }

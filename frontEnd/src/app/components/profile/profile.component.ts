@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authService/authentication.service';
 import { User } from '../../models/user.model';
 import { Subject } from '../../models/subjects.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   templateUrl: './profile.component.html',
@@ -9,10 +10,13 @@ import { Subject } from '../../models/subjects.model';
 })
 export class ProfileComponent implements OnInit {
   userDetail = { };
-  constructor(private authService: AuthenticationService) { }
+  value = {};
+  constructor(private authService: AuthenticationService,
+    private activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.authService.getUserDetail().subscribe(data => {
+    this.value['id'] = this.activeRoute.snapshot.params.id;
+    this.authService.getProfileById(this.value).subscribe(data => {
       console.log(data['msg']);
       data = data['msg'];
       this.userDetail['id'] = data['id'];

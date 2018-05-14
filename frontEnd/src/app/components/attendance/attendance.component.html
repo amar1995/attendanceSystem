@@ -1,3 +1,43 @@
-<p>
-  attendance works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3"></div>
+      <div class="col-md-6">
+          <div class="panel panel-danger">
+              <div class="panel-heading">
+                Attendance for {{user}}                
+                  <div class="pull-right action-buttons">
+                      <div class="btn-group pull-right">
+                          <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                              <span class="glyphicon glyphicon-cog" style="margin-right: 0px;"></span>
+                          </button>
+                          <ul class="dropdown-menu slidedown">
+                              <li><a [routerLink]="['/edit']"><span class="glyphicon glyphicon-pencil"></span>Edit</a></li>
+                              <li><a [routerLink]="['/attendance']"><span class="glyphicon glyphicon-briefcase"></span>Attendance</a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div class="panel-body table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Present</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let attendance of attendances">
+                    <tr>
+                      <td>{{attendance.present  }}</td>
+                      <td>{{replaceTZ(attendance.timeOfEntering)}}</td>
+                      <td>{{  getTimes(attendance.timeOfEntering) }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<router-outlet></router-outlet>
+              

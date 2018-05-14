@@ -5,13 +5,12 @@ import { GenericValidator } from '../../shared/generic-validator';
 import { NumberValidators } from '../../shared/number.validator';
 import { Observable } from 'rxjs/Observable';
 
-
 @Component({
-  selector: 'app-id-form',
-  templateUrl: './id-form.component.html',
-  styleUrls: ['./id-form.component.css']
+  selector: 'app-get-profile-admin-form',
+  templateUrl: './get-profile-admin-form.component.html',
+  styleUrls: ['./get-profile-admin-form.component.css']
 })
-export class IdFormComponent implements OnInit {
+export class GetProfileAdminFormComponent implements OnInit {
   formId: FormGroup;
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
   displayMessage: { [key: string]: string } = {};
@@ -28,7 +27,7 @@ export class IdFormComponent implements OnInit {
           }
       };
       this.genericValidator = new GenericValidator(this.validationMessages);
-   }
+    }
 
   ngOnInit() {
   }
@@ -37,9 +36,7 @@ export class IdFormComponent implements OnInit {
     this.formId = this.fb.group({
       id: ['', [
         Validators.required,
-        NumberValidators.range(1, 100)]],
-      register: '',
-      edit: ''
+        NumberValidators.range(1, 100)]]
     });
   }
 
@@ -55,11 +52,6 @@ export class IdFormComponent implements OnInit {
     });
   }
   onSubmit() {
-    // console.log(this.formId);
-    if ( this.formId.value.register) {
-    this.router.navigate([`/signup/${this.formId.value.id}`]);
-    } else {
-    this.router.navigate([`/edit/${this.formId.value.id}`]);
-    }
+    this.router.navigate([`/profile/:${this.formId.value.id}`]);
   }
 }

@@ -217,10 +217,14 @@ router.post('/forget',(req,res) => {
 });
 
 function enrollUserId(id){
-    const user = new User({
-        id
+    User.findOne({id: id},(err,user) => {
+        if(!user) {
+            const user = new User({
+                id
+            });
+            user.save();
+        }
     });
-    user.save();
 }
 
 module.exports = {

@@ -1,59 +1,114 @@
 <div class = "container">
     <div class="wrapper">
-      <form  name="SignUp_Form" class="form-signin" [formGroup]="userDetail" (ngSubmit)="onSubmitEdit()">       
-          <h3 class="form-signin-heading">Welcome! Please Sign Up</h3>
+      <form  name="EditUp_Form" class="form-signin" [formGroup]="userDetail" (ngSubmit)="onSubmitEdit()">       
+          <h3 class="form-signin-heading">Welcome! Please Edit</h3>
           <hr class="colorgraph"><br>
           
           <div class="form-group">
-            <label for='id'>ID: </label>
-              <input type="text" class="form-control" name="ID" 
-              placeholder="id" formControlName= "id" 
-              required="" autofocus="" disabled />
+            <label for="userId">Id: </label>
+  
+            <input class="form-control" 
+                    id="userId" 
+                    type="text" 
+                    placeholder="Id" 
+                    formControlName="id" />
           </div>
-          <div class="form-group">
+          <div class="form-group"
+            [ngClass]="{'has-error': displayMessage.name }">
             <label for='name'>Name: </label>
               <input type="text" class="form-control" name="name" 
               placeholder="Name" formControlName= "name" 
               required="" autofocus="" />
+              <span class="help-block" *ngIf="displayMessage.name">
+                  {{displayMessage.name}}
+              </span>
           </div>
-          <div class="form-group">
+          <div class="form-group"
+          [ngClass]="{'has-error': displayMessage.email_id }">
             <label for='email'>Email: </label>
               <input type="text" class="form-control" name="Email" 
               placeholder="Email" formControlName= "email_id" 
               required="" autofocus="" />
+              <span class="help-block" *ngIf="displayMessage.email_id">
+                  {{displayMessage.email_id}}
+              </span>
           </div>
-          <div class="form-group">
-            <label for='username'>Username: </label>
-              <input type="text" class="form-control" name="Username" 
-              placeholder="Username" formControlName= "username"
+          <div class="form-group"
+          [ngClass]="{'has-error': displayMessage.address }">
+            <label for='address'>Address: </label>
+              <input type="text" class="form-control" name="address" 
+              placeholder="Address" formControlName= "address" 
+              required="" autofocus="" />
+              <span class="help-block" *ngIf="displayMessage.address">
+                  {{displayMessage.address}}
+              </span>
+          </div>
+          <div class="form-group"
+          [ngClass]="{'has-error': displayMessage.dateOfBirth }">
+            <label for='email'>Date Of Birth: </label>
+              <input type="date" class="form-control" name="dateOfBirth" 
+              placeholder="dateOfBirth" formControlName= "dateOfBirth" 
+              required="" autofocus="" />
+              <span class="help-block" *ngIf="displayMessage.dateOfBirth">
+                  {{displayMessage.dateOfBirth}}
+              </span>
+          </div>
+          <div class="form-group"
+          [ngClass]="{'has-error': displayMessage.post }">
+            <label for='username'>Post: </label>
+              <input type="text" class="form-control" name="post" 
+              placeholder="post" formControlName= "post"
               required=""  autofocus="" />
           </div>
-          <div class="form-group">
-            <label for='password'>password: </label>
-              <input type="password" class="form-control" name="Password"
-               placeholder="Password" formControlName= "password" 
-               required=""/>     		  
+          <div class="form-group"
+          [ngClass]="{'has-error': displayMessage.contactNumber }">
+            <label for='username'>Contact Number: </label>
+              <input type="number" class="form-control" name="contactNumber" 
+              placeholder="Contact" formControlName= "contactNumber"
+              required=""  autofocus="" />
+              <span class="help-block" *ngIf="displayMessage.contactNumber">
+                  {{displayMessage.contactNumber}}
+              </span>
           </div>
-          <div class="form-inline">
-            <label for='password'>Subject: </label>
-            <div class="form-group">
-                <label for='password'>Name: </label>
-                <input type="text" class="form-control" name="Password"
-                 placeholder="Password" formControlName= "" 
-                 required=""/>
-                 <label for='password'>Stream: </label>
-                 <input type="text" class="form-control" name="Password"
-                  placeholder="Password" formControlName= "" 
-                  required=""/>
-                  <label for='password'>Semester: </label>
-                  <input type="text" class="form-control" name="Password"
-                  placeholder="Password" formControlName= "" 
-                  required=""/>
-            </div>
+          <div formArrayName="subject">
+              <div class="row">
+                  <button type="button" class="btn btn-success"
+                          (click)="addTag()">Add Subject
+                  </button>
+              </div>
+              <div class="form-group"
+                  *ngFor="let tag of subject.controls; let i=index" [formGroup]="tag" >
+                  <div class="form-inline">
+                    <label for='subject'>Subject: </label>
+                    <div class="form-group">
+                        <label for='subjectName'>Name: </label>
+                        <input type="text" class="form-control" name="subjectName"
+                          placeholder="SubjectName" formControlName= "name" 
+                          required=""/>
+                          <label for='stream'>Stream: </label>
+                          <input type="text" class="form-control" name="stream"
+                          placeholder="Stream" formControlName= "stream" 
+                          required=""/>
+                          <label for='semester'>Semester: </label>
+                          <input type="text" class="form-control" name="semester"
+                          placeholder="Semester" formControlName= "semester" 
+                          required=""/>
+                    </div>
+                  </div>
+                  <button class="btn btn-warning"
+                          type="button"
+                      (click)="deleteTag(i)">Delete Subject
+                  </button>
+              </div>
           </div>
           <br>
           <div class="form-group">
-            <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="SignUp" type="Submit">SignUp</button>  			
+              <button class="btn btn-primary"
+              type="submit"
+              style="width:80px;margin-right:10px"
+              [disabled]="!userDetail.valid">
+              Edit Done
+            </button>
           </div>
         </form>
     </div>

@@ -3,7 +3,7 @@ body, html {
     height: 100vh;
     background-image: url("./assets/images/background.jpg");
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-size: cover;
 }
 

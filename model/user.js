@@ -30,8 +30,7 @@ var users = new Schema({
         default: false
     },
     email_id: {
-        type: String,
-        unique: true
+        type: String
     },
     password: {
         type: String

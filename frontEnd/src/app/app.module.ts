@@ -22,6 +22,7 @@ import { NoticeComponent } from './components/notice/notice.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AttendanceComponent } from './components/attendance/attendance.component';
+import { GetProfileAdminFormComponent } from './components/get-profile-admin-form/get-profile-admin-form.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -37,6 +38,10 @@ const appRoutes: Routes = [
     component: IdFormComponent,
     canActivate: [AdminGuard]
   },
+  { path: 'getProfile',
+    component: GetProfileAdminFormComponent,
+    canActivate: [AdminGuard]
+  },
   { path: 'blog',
     component: BlogComponent,
     canActivate: [AuthGuard]
@@ -45,13 +50,25 @@ const appRoutes: Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuard]
   },
+  { path: 'profile/:id',
+    component: ProfileComponent,
+    canActivate: [AdminGuard]
+  },
   { path: 'edit',
     component: EditComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+  },
+  { path: 'edit/:id',
+    component: EditComponent,
+    canActivate: [AdminGuard],
   },
   {path: 'attendance',
     component: AttendanceComponent,
     canActivate: [AuthGuard]
+  },
+  {path: 'attendance/:id',
+    component: AttendanceComponent,
+    canActivate: [AdminGuard]
   },
   {path: 'notice',
     component: NoticeComponent,
@@ -76,7 +93,8 @@ const appRoutes: Routes = [
     BlogComponent,
     EditComponent,
     AttendanceComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    GetProfileAdminFormComponent
   ],
   imports: [
     BrowserModule,

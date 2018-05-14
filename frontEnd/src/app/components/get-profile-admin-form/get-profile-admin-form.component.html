@@ -1,0 +1,27 @@
+<div class = "container">
+	<div class="wrapper">
+		<form name="Id_Form" class="form-signin" [formGroup]="formId" (ngSubmit)="onSubmit()">       
+		    <h3 class="form-signin-heading">Welcome! Please Enter ID</h3>
+			  <hr class="colorgraph"><br>
+			  
+        <div class="form-group" 
+        [ngClass]="{'has-error': displayMessage.id }">
+          <label for="productNameId">Id</label>
+            <input class="form-control" 
+                            id="userId" 
+                            type="text" 
+                            placeholder="Id" 
+                            formControlName="id" />
+            <span class="help-block" *ngIf="displayMessage.id">
+                            {{displayMessage.id}}
+            </span>
+        </div>
+        <button class="btn btn-primary"
+            type="submit"
+            style="width:80px;margin-right:10px"
+            [disabled]='!formId.valid'>
+            Submit
+        </button>  			
+    </form>
+	</div>
+</div>
