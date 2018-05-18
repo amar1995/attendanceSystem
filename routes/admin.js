@@ -52,22 +52,22 @@ router.patch('/:id/edit',(req,res) => {
 });
 
 
-router.get('/:id/attendance', (req,res) => {
-    let attendanceArray = [];
-    const attendanceIds = req.params.id;
-    // console.log(attendanceIds);
-    for(let i=0;i< attendanceIds.length; i++)
-    {
-        Attendance.findById(attendanceIds[i],(err,result) => {
-            attendanceArray.push(result);
-            if(i === attendanceIds.length-1) 
-            return res.send({
-                success: true,
-                msg: attendanceArray
-            });
-        });
-    }
-});
+// router.get('/:id/attendance', (req,res) => {
+//     let attendanceArray = [];
+//     const attendanceIds = req.params.id;
+//     // console.log(attendanceIds);
+//     for(let i=0;i< attendanceIds.length; i++)
+//     {
+//         Attendance.findById(attendanceIds[i],(err,result) => {
+//             attendanceArray.push(result);
+//             if(i === attendanceIds.length-1) 
+//             return res.send({
+//                 success: true,
+//                 msg: attendanceArray
+//             });
+//         });
+//     }
+// });
 
 router.get('/:id/profile', (req,res) => {
     
@@ -93,6 +93,7 @@ router.get('/:id/profile', (req,res) => {
 });
 
 router.get('/:id/attendance', (req,res) => {
+    // console.log(req.params.id);
     User.findOne({id: req.params.id}, (err,user) => {
         if(err) {
             return res.send({
@@ -113,6 +114,7 @@ router.get('/:id/attendance', (req,res) => {
         {
             Attendance.findById(attendanceIds[i],(err,result) => {
                 attendanceArray.push(result);
+                console.log(attendanceArray);
                 if(i === attendanceIds.length-1) 
                 return res.send({
                     success: true,

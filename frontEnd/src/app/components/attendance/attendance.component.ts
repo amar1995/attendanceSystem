@@ -11,16 +11,18 @@ export class AttendanceComponent implements OnInit {
   attendances: any;
   constructor(private authService: AuthenticationService,
     private activeRoute: ActivatedRoute) {
-    if (this.authService.isAdmin() && this.activeRoute.snapshot.params.id) {
+    if (this.authService.isAdmin() && this.activeRoute.snapshot.params.id !== undefined) {
       this.user = this.activeRoute.snapshot.params.id;
+      // console.log(this.user);
     } else {
       this.user = this.authService.getId();
     }
    }
 
   ngOnInit() {
-    this.authService.getAttendance(this.activeRoute.snapshot.params.id).subscribe(data => {
+    this.authService.getAttendance(this.user).subscribe(data => {
       this.attendances = data['msg'];
+      console.log(this.attendances);
     });
   }
 

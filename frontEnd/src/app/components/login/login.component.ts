@@ -57,13 +57,13 @@ export class LoginComponent implements OnInit {
     Observable.merge(this.myLoginForm.valueChanges, ...controlBlurs).debounceTime(800).subscribe(value => {
         this.displayMessage = this.genericValidator.processMessages(this.myLoginForm);
     });
-}
+  }
 
   onSubmit() {
     // console.log(this.myLoginForm.value);
     this.authService.onLogin(this.myLoginForm.value)
     .subscribe(data => {
-      // console.log(jwtDecode(data.token));
+      console.log(jwtDecode(data.token));
       if (data.success) {
         localStorage.setItem('token', data.token);
         this.router.navigate(['/']);

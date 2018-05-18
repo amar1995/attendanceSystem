@@ -113,6 +113,7 @@ export class SignupComponent implements OnInit {
     this.authService.
     registerNewUser(this.userDetail.value)
     .subscribe(data => {
+      console.log(data);
       if (data['success']) {
         this.router.navigate(['/']);
       }

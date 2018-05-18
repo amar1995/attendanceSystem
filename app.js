@@ -39,20 +39,20 @@ const parser = new parsers.Readline({
    delimiter: '\n'
  });
 
-// const serialPort = new SerialPort('COM3', {
-//   baudRate: 9600
-// });
+const serialPort = new SerialPort('COM3', {
+  baudRate: 9600
+});
 
-// serialPort.pipe(parser);
+serialPort.pipe(parser);
 
-// serialPort.on('open',(err) => {
-//   if(err)
-//   console.log(err);
-//   else  
-//   console.log('serialPort opened');
-// });
+serialPort.on('open',(err) => {
+  if(err)
+  console.log(err);
+  else  
+  console.log('serialPort opened');
+});
 
-// parser.on('data',console.log);
+parser.on('data',console.log);
 
 parser.on('data', (data) => {
   // setTimeout( () => console.log(JSON.parse(data)),2000);

@@ -82,7 +82,7 @@ router.post('/register', (req,res) => {
         else {
             require('../utils/objectExtracter')(req.body,
             ['name','email_id','dateOfBirth','dateOfJoining',
-            'contactNumber','username','password','subject'])
+            'contactNumber','username','password','subject','post','address'])
             .then((body) => {
                 for(let val in body){
                     user[val] = body[val];
